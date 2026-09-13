@@ -644,7 +644,7 @@ namespace UI {
 
         if (deleteClicked) {
             if (active.valid()) {
-                ImGuiMCP::OpenPopup("Confirm Delete Light Template");
+                ImGuiMCP::OpenPopup(QLT("Confirm Delete Light Template"));
             }
             else {
                 logger::warn("Delete clicked but no light selected");
@@ -653,7 +653,7 @@ namespace UI {
         }
 
         if (ImGuiMCP::BeginPopupModal(
-            "Confirm Delete Light Template",
+            QLT("Confirm Delete Light Template"),
             nullptr,
             ImGuiMCP::ImGuiWindowFlags_AlwaysAutoResize))
         {
@@ -860,7 +860,7 @@ namespace UI {
                             newTemplateCategory[sizeof(newTemplateCategory) - 1] = '\0';
 
                             // --- Category row ---
-                            ImGuiMCP::ImVec2 emittanceTextSize = ImGuiMCP::CalcTextSize("External Emittance", nullptr, false, -1.0f);
+                            ImGuiMCP::ImVec2 emittanceTextSize = ImGuiMCP::CalcTextSize(QLT("External Emittance"), nullptr, false, -1.0f);
                             float emittanceButtonWidth = emittanceTextSize.x + style->FramePadding.x * 2.0f;
 
                             ImGuiMCP::Text(QLT("Category:"));
