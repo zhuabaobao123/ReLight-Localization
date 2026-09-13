@@ -1108,7 +1108,7 @@ namespace UI {
                             ImGuiMCP::Separator();
 
                             if (ImGuiMCP::SliderFloat3(
-                                "Position",
+                                QLT("Position"),
                                 &config.position[0],
                                 -sliderRange, sliderRange, "%.3f")) {               
 
@@ -1162,7 +1162,7 @@ namespace UI {
                            if (isSpotLight)
                             {
                                 if (ImGuiMCP::SliderFloat3(
-                                    "Rotation",
+                                    QLT("Rotation"),
                                     &config.rotation[0],
                                     -180.0f,
                                     180.0f,
@@ -1300,7 +1300,7 @@ namespace UI {
 
                         if (colorPickerOpen)
                         {
-                            if (ImGuiMCP::Begin("Color Picker", &colorPickerOpen,
+                            if (ImGuiMCP::Begin(QLT("Color Picker"), &colorPickerOpen,
                                 ImGuiMCP::ImGuiWindowFlags_AlwaysAutoResize |
                                 ImGuiMCP::ImGuiWindowFlags_NoCollapse))
                             {
