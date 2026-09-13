@@ -924,7 +924,7 @@ namespace UI {
         }
         else
         {
-            // Single entry — just a flat selectable
+            // Single entry ï¿½ just a flat selectable
             ImGuiMCP::PushID(firstIdx);
             if (ImGuiMCP::Selectable(groupMenuName.c_str(), firstIdx == selectedIndex))
                 selectedIndex = firstIdx;
@@ -1020,7 +1020,7 @@ namespace UI {
     {
         static bool showFlagWindow = false;
 
-        if (ImGuiMCP::Button((std::string("Flags ") + flagIcon).c_str())) {
+        if (ImGuiMCP::Button((std::string(QLT("Flags ")) + flagIcon).c_str())) {
             showFlagWindow = !showFlagWindow;
         }
 
@@ -1049,57 +1049,53 @@ namespace UI {
                     }
                 };
 
-            FlagCheckbox("Candle", flags, RELIGHT_FLAGS::kCandle,
-                "Important for light flicker prevention. Also allows the light to merge with any other "
-                "light created from a relight json file which also has the Candle flag.");
+            FlagCheckbox(QLT("Candle"), flags, RELIGHT_FLAGS::kCandle,
+QLT("Important for light flicker prevention. Also allows the light to merge with any other "
+                "light created from a relight json file which also has the Candle flag."));
 
-            FlagCheckbox("Chandelier", flags, RELIGHT_FLAGS::kChandelier,
-                "Important for light flicker prevention.");
+            FlagCheckbox(QLT("Chandelier"), flags, RELIGHT_FLAGS::kChandelier,
+QLT("Important for light flicker prevention."));
 
-            FlagCheckbox("Fire", flags, RELIGHT_FLAGS::kFire,
-                "Important for light flicker prevention. Also allows the light to merge with any other "
-                "light created from a relight json file which also has the Fire flag.");
+            FlagCheckbox(QLT("Fire"), flags, RELIGHT_FLAGS::kFire,
+QLT("Important for light flicker prevention. Also allows the light to merge with any other "
+                "light created from a relight json file which also has the Fire flag."));
 
-            FlagCheckbox("Giant Campfire", flags, RELIGHT_FLAGS::kGiantCampfire,
-                "Allows merging with any other light created by a relight json config with the Fire flag (needed).");
+            FlagCheckbox(QLT("Giant Campfire"), flags, RELIGHT_FLAGS::kGiantCampfire,
+QLT("Allows merging with any other light created by a relight json config with the Fire flag (needed)."));
 
-            FlagCheckbox("Other", flags, RELIGHT_FLAGS::kOther,
-                "Allows merging with any other light created by a relight json config with the Other flag.");
+            FlagCheckbox(QLT("Other"), flags, RELIGHT_FLAGS::kOther,
+QLT("Allows merging with any other light created by a relight json config with the Other flag."));
 
-            FlagCheckbox("Increased Merge Distance", flags, RELIGHT_FLAGS::kIncreasedMergeDistance,
-                "Grants a significantly larger merge distance to lights. Currently used for ruin candles.");
+            FlagCheckbox(QLT("Increased Merge Distance"), flags, RELIGHT_FLAGS::kIncreasedMergeDistance,
+QLT("Grants a significantly larger merge distance to lights. Currently used for ruin candles."));
 
-            FlagCheckbox("Increased Menu XYZ Scale", flags, RELIGHT_FLAGS::kIncreasedMenuXYZScale,
-                "Increases the in-game menu XYZ position slider range from 250 to 1250, for positioning "
-                "lights on larger objects.");
+            FlagCheckbox(QLT("Increased Menu XYZ Scale"), flags, RELIGHT_FLAGS::kIncreasedMenuXYZScale,
+QLT("Increases the in-game menu XYZ position slider range from 250 to 1250, for positioning "
+                "lights on larger objects."));
 
-            FlagCheckbox("No Merging", flags, RELIGHT_FLAGS::kNoMerging,
-                "Light sources of this type will never merge.");
+            FlagCheckbox(QLT("No Merging"), flags, RELIGHT_FLAGS::kNoMerging,
+QLT("Light sources of this type will never merge."));
 
-            FlagCheckbox("Outdoor", flags, RELIGHT_FLAGS::kOutdoor,
-                "Light source is to be applied outdoors only. Lets you have interior/exterior lighting "
-                "separated -- e.g. an Outdoor-flagged lantern vs a regular one with no flags.");
+            FlagCheckbox(QLT("Outdoor"), flags, RELIGHT_FLAGS::kOutdoor,
+QLT("Light source is to be applied outdoors only. Lets you have interior/exterior lighting "
+                "separated -- e.g. an Outdoor-flagged lantern vs a regular one with no flags."));
 
-            FlagCheckbox("Pulse", flags, RELIGHT_FLAGS::kPulse,
-                "Light will pulse instead of flicker, good for flower lights ect.");
+            FlagCheckbox(QLT("Pulse"), flags, RELIGHT_FLAGS::kPulse,
+QLT("Light will pulse instead of flicker, good for flower lights ect."));
 
                 if (globals::islInstalled) {
                     // --- Extended Flags ---
                     ImGuiMCP::SeparatorText(QLT("Community Shaders Flags"));
 
-                    FlagCheckbox(
-                        "Inverse Square",
+                    FlagCheckbox(QLT("Inverse Square"),
                         flags,
                         RELIGHT_FLAGS::kInverseSquare,
-                        "Uses inverse square falloff for attenuation, must refresh light for changes to take effect."
-                    );
+QLT("Uses inverse square falloff for attenuation, must refresh light for changes to take effect."));
 
-                    FlagCheckbox(
-                        "Linear",
+                    FlagCheckbox(QLT("Linear"),
                         flags,
                         RELIGHT_FLAGS::kLinear,
-                        "Applies linear lighting flag, must refresh light for changes to take effect"
-                    );
+QLT("Applies linear lighting flag, must refresh light for changes to take effect"));
                 }
 
             ImGuiMCP::End();
@@ -1110,7 +1106,7 @@ namespace UI {
   {
        bool showFlagWindow = false;
 
-      if (ImGuiMCP::Button((std::string("Flags ") + flagIcon).c_str())) {
+      if (ImGuiMCP::Button((std::string(QLT("Flags ")) + flagIcon).c_str())) {
           showFlagWindow = !showFlagWindow;
       }
 
@@ -1144,49 +1140,37 @@ namespace UI {
                   }
               };
 
-          FlagCheckbox(
-              "Dynamic",
+          FlagCheckbox(QLT("Dynamic"),
               flags,
               static_cast<uint32_t>(RE::TES_LIGHT_FLAGS::kDynamic),
-              "Light is dynamic."
-          );
+QLT("Light is dynamic."));
 
-          FlagCheckbox(
-              "Can Carry",
+          FlagCheckbox(QLT("Can Carry"),
               flags,
               static_cast<uint32_t>(RE::TES_LIGHT_FLAGS::kCanCarry),
-              "Light can be carried."
-          );
+QLT("Light can be carried."));
 
-          FlagCheckbox(
-              "Negative",
+          FlagCheckbox(QLT("Negative"),
               flags,
               static_cast<uint32_t>(RE::TES_LIGHT_FLAGS::kNegative),
-              "Light has negative lighting."
-          );
+QLT("Light has negative lighting."));
 
-          FlagCheckbox(
-              "Deep Copy",
+          FlagCheckbox(QLT("Deep Copy"),
               flags,
               static_cast<uint32_t>(RE::TES_LIGHT_FLAGS::kDeepCopy),
-              "Light data is deep copied."
-          );
+QLT("Light data is deep copied."));
 
-          FlagCheckbox(
-              "Off By Default",
+          FlagCheckbox(QLT("Off By Default"),
               flags,
               static_cast<uint32_t>(RE::TES_LIGHT_FLAGS::kOffByDefault),
-              "Light is off by default."
-          );
+QLT("Light is off by default."));
 
           ImGuiMCP::BeginDisabled(true);
 
-          FlagCheckbox(
-              "Flicker",
+          FlagCheckbox(QLT("Flicker"),
               flags,
               static_cast<uint32_t>(RE::TES_LIGHT_FLAGS::kFlicker),
-              "Light flickers."
-          );
+QLT("Light flickers."));
 
           if (ImGuiMCP::IsItemHovered()) {
               ImGuiMCP::SetTooltip(
@@ -1194,12 +1178,10 @@ namespace UI {
               );
           }
 
-          FlagCheckbox(
-              "Flicker Slow",
+          FlagCheckbox(QLT("Flicker Slow"),
               flags,
               static_cast<uint32_t>(RE::TES_LIGHT_FLAGS::kFlickerSlow),
-              "Light uses the slow flicker behavior."
-          );
+QLT("Light uses the slow flicker behavior."));
 
           if (ImGuiMCP::IsItemHovered()) {
               ImGuiMCP::SetTooltip(
@@ -1207,12 +1189,10 @@ namespace UI {
               );
           }
 
-          FlagCheckbox(
-              "Pulse",
+          FlagCheckbox(QLT("Pulse"),
               flags,
               static_cast<uint32_t>(RE::TES_LIGHT_FLAGS::kPulse),
-              "Light pulses instead of flickering."
-          );
+QLT("Light pulses instead of flickering."));
 
           if (ImGuiMCP::IsItemHovered()) {
               ImGuiMCP::SetTooltip(
@@ -1220,12 +1200,10 @@ namespace UI {
               );
           }
 
-          FlagCheckbox(
-              "Pulse Slow",
+          FlagCheckbox(QLT("Pulse Slow"),
               flags,
               static_cast<uint32_t>(RE::TES_LIGHT_FLAGS::kPulseSlow),
-              "Light uses the slow pulse behavior."
-          );
+QLT("Light uses the slow pulse behavior."));
 
           if (ImGuiMCP::IsItemHovered()) {
               ImGuiMCP::SetTooltip(
@@ -1235,58 +1213,44 @@ namespace UI {
 
           ImGuiMCP::EndDisabled();
 
-          FlagCheckbox(
-              "Spotlight",
+          FlagCheckbox(QLT("Spotlight"),
               flags,
               static_cast<uint32_t>(RE::TES_LIGHT_FLAGS::kSpotlight),
-              "Light is treated as a spotlight."
-          );
+QLT("Light is treated as a spotlight."));
 
-          FlagCheckbox(
-              "Spot Shadow",
+          FlagCheckbox(QLT("Spot Shadow"),
               flags,
               static_cast<uint32_t>(RE::TES_LIGHT_FLAGS::kSpotShadow),
-              "Light casts a spotlight shadow."
-          );
+QLT("Light casts a spotlight shadow."));
 
-          FlagCheckbox(
-              "Hemi Shadow",
+          FlagCheckbox(QLT("Hemi Shadow"),
               flags,
               static_cast<uint32_t>(RE::TES_LIGHT_FLAGS::kHemiShadow),
-              "Light uses hemispherical shadowing."
-          );
+QLT("Light uses hemispherical shadowing."));
 
-          FlagCheckbox(
-              "Omni Shadow",
+          FlagCheckbox(QLT("Omni Shadow"),
               flags,
               static_cast<uint32_t>(RE::TES_LIGHT_FLAGS::kOmniShadow),
-              "Light casts an omnidirectional shadow."
-          );
+QLT("Light casts an omnidirectional shadow."));
 
-          FlagCheckbox(
-              "Portal Strict",
+          FlagCheckbox(QLT("Portal Strict"),
               flags,
               static_cast<uint32_t>(RE::TES_LIGHT_FLAGS::kPortalStrict),
-              "Light uses strict portal behavior this should be on for shadow lights, i personally have it on for every light."
-          );
+QLT("Light uses strict portal behavior this should be on for shadow lights, i personally have it on for every light."));
 
           if(globals::islInstalled){
           // --- Extended Flags ---
           ImGuiMCP::SeparatorText(QLT("Community Shaders Flags"));
 
-          FlagCheckbox(
-              "Inverse Square",
+          FlagCheckbox(QLT("Inverse Square"),
               flags,
               static_cast<uint32_t>(TES_LIGHT_FLAGS_EXT::kInverseSquare),
-              "Uses inverse square falloff for attenuation"
-          );
+QLT("Uses inverse square falloff for attenuation"));
 
-          FlagCheckbox(
-              "Linear",
+          FlagCheckbox(QLT("Linear"),
               flags,
               static_cast<uint32_t>(TES_LIGHT_FLAGS_EXT::kLinear),
-              "Applies Linear Lighting flag ."
-          );
+QLT("Applies Linear Lighting flag ."));
           }
           ImGuiMCP::End();
       }
