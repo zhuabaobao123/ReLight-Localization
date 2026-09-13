@@ -924,7 +924,7 @@ namespace UI {
         }
         else
         {
-            // Single entry ï¿½ just a flat selectable
+            // Single entry — just a flat selectable
             ImGuiMCP::PushID(firstIdx);
             if (ImGuiMCP::Selectable(groupMenuName.c_str(), firstIdx == selectedIndex))
                 selectedIndex = firstIdx;
