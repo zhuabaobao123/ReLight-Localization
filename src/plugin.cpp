@@ -12,6 +12,7 @@
 #include "LightAttachmentHooks.h"
 #include "vanillaMenus.h"
 #include "ini.h"
+#include "I18n.h"
 
 
 static void MessageHandler(SKSE::MessagingInterface::Message* msg) {
@@ -67,6 +68,7 @@ SKSEPluginLoad(const SKSE::LoadInterface* skse) {
    setupLog(spdlog::level::info);
    logger::info("Relight Plugin is Loaded");
    SKSE::GetMessagingInterface()->RegisterListener(MessageHandler);
+   Relight::I18n::Load();
    UI::Register();
    hasInverseSquareLighting();
    hasNativeMeshLightFlickerFix(); 

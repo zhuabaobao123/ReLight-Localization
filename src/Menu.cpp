@@ -13,17 +13,17 @@ namespace UI {
     void Register() {
         if (!SKSEMenuFramework::IsInstalled()) return;
 
-        SKSEMenuFramework::SetSection("ReLight");
+        SKSEMenuFramework::SetSection(QLT("ReLight"));
 
-        SKSEMenuFramework::AddSectionItem("Settings", RenderSettings);
+        SKSEMenuFramework::AddSectionItem(QLT("Settings"), RenderSettings);
 
-        SKSEMenuFramework::AddSectionItem("Light Editor", RenderLightEditor);
+        SKSEMenuFramework::AddSectionItem(QLT("Light Editor"), RenderLightEditor);
 
-        SKSEMenuFramework::AddSectionItem("Attach Lights", RenderAttachRemove);
+        SKSEMenuFramework::AddSectionItem(QLT("Attach Lights"), RenderAttachRemove);
 
-        SKSEMenuFramework::AddSectionItem("Light Merge", RenderLightMergeMenu);
+        SKSEMenuFramework::AddSectionItem(QLT("Light Merge"), RenderLightMergeMenu);
 
-        SKSEMenuFramework::AddSectionItem("Light Flicker Prevention", RenderLightFlickerPreventionMenu);
+        SKSEMenuFramework::AddSectionItem(QLT("Light Flicker Prevention"), RenderLightFlickerPreventionMenu);
 
         SKSEMenuFramework::AddEvent(OnMenuEvent, 0);
 
