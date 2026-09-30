@@ -12,13 +12,13 @@ void __stdcall RenderLightFlickerPreventionMenu() {
     {
         ImGuiMCP::PushStyleColor(ImGuiMCP::ImGuiCol_Text, ImGuiMCP::ImVec4{ 1.0f, 0.85f, 0.4f, 1.0f });
 
-        ImGuiMCP::Text("Light Flicker Prevention");
+        ImGuiMCP::Text(QLT("Light Flicker Prevention"));
 
         ImGuiMCP::PopStyleColor();
 
         ImGuiMCP::SameLine();
 
-        bool saveINIClicked = ImGuiMCP::Button("Save INI");
+        bool saveINIClicked = ImGuiMCP::Button(QLT("Save INI"));
 
         ImGuiMCP::ImVec2 rectMax = ImGuiMCP::GetItemRectMax();
         ImGuiMCP::ImVec2 rectMin = ImGuiMCP::GetItemRectMin();
@@ -36,7 +36,7 @@ void __stdcall RenderLightFlickerPreventionMenu() {
 
         ImGuiMCP::SameLine();
 
-        ImGuiMCP::Text("(This only works with relight overhauls that use relight flags)");
+        ImGuiMCP::Text(QLT("(This only works with relight overhauls that use relight flags)"));
 
         ImGuiMCP::ImVec2 avail = ImGuiMCP::GetContentRegionAvail();
 
@@ -47,85 +47,85 @@ void __stdcall RenderLightFlickerPreventionMenu() {
         float colWidth = avail.x * 0.25f;
         ImGuiMCP::PushItemWidth(colWidth);
 
-        if (ImGuiMCP::Checkbox("Enable Light flicker prevention", &globals::enableLightFlickerPreventionMeasures)) {
+        if (ImGuiMCP::Checkbox(QLT("Enable Light flicker prevention"), &globals::enableLightFlickerPreventionMeasures)) {
         }
 
         if (ImGuiMCP::IsItemHovered()) {
-            ImGuiMCP::SetTooltip("Only the 7 closest lights can affect a surface");
+            ImGuiMCP::SetTooltip(QLT("Only the 7 closest lights can affect a surface"));
         }
 
-        ImGuiMCP::SliderInt("Max Surface Size Flicker Prevention", &globals::largeSurfaceSize, 0, 5000);
+        ImGuiMCP::SliderInt(QLT("Max Surface Size Flicker Prevention"), &globals::largeSurfaceSize, 0, 5000);
         if (ImGuiMCP::IsItemHovered()) {
-            ImGuiMCP::SetTooltip("Surfaces larger than this will not participate in light flicker prevention (windhelm bridge is size 2300 and has many lights on it makes no sense to limit to only 7");
+            ImGuiMCP::SetTooltip(QLT("Surfaces larger than this will not participate in light flicker prevention (windhelm bridge is size 2300 and has many lights on it makes no sense to limit to only 7"));
         }
 
-        ImGuiMCP::SliderInt("Medium surface size", &globals::mediumSurfaceSize, 0, 1500);
+        ImGuiMCP::SliderInt(QLT("Medium surface size"), &globals::mediumSurfaceSize, 0, 1500);
         if (ImGuiMCP::IsItemHovered()) {
-            ImGuiMCP::SetTooltip("Distance checks are only enforced on surfaces (Trishape WorldBound) smaller than this");
+            ImGuiMCP::SetTooltip(QLT("Distance checks are only enforced on surfaces (Trishape WorldBound) smaller than this"));
         }
 
-        ImGuiMCP::SliderInt("Small surface size", &globals::smallSurfaceSize, 0, 1000);
+        ImGuiMCP::SliderInt(QLT("Small surface size"), &globals::smallSurfaceSize, 0, 1000);
         if (ImGuiMCP::IsItemHovered()) {
-            ImGuiMCP::SetTooltip("Any surface (Trishape WorldBound) size larger will not have max light type per surface enforced on it");
+            ImGuiMCP::SetTooltip(QLT("Any surface (Trishape WorldBound) size larger will not have max light type per surface enforced on it"));
         }
-        ImGuiMCP::SliderInt("Candles Per SM Surface", &globals::maxCandlesPerSurfaceSM, 0, 7);
+        ImGuiMCP::SliderInt(QLT("Candles Per SM Surface"), &globals::maxCandlesPerSurfaceSM, 0, 7);
         if (ImGuiMCP::IsItemHovered())
         {
-            ImGuiMCP::SetTooltip("Max candle lights allowed on small surfaces.");
+            ImGuiMCP::SetTooltip(QLT("Max candle lights allowed on small surfaces."));
         }
 
-        ImGuiMCP::SliderInt("Chandeliers Per SM Surface", &globals::maxChandeliersPerSurfaceSM, 0, 7);
+        ImGuiMCP::SliderInt(QLT("Chandeliers Per SM Surface"), &globals::maxChandeliersPerSurfaceSM, 0, 7);
         if (ImGuiMCP::IsItemHovered())
         {
-            ImGuiMCP::SetTooltip("Max chandelier lights allowed on small surfaces.");
+            ImGuiMCP::SetTooltip(QLT("Max chandelier lights allowed on small surfaces."));
         }
 
-        ImGuiMCP::SliderInt("Fires Per SM Surface", &globals::maxFiresPerSurfaceSM, 0, 7);
+        ImGuiMCP::SliderInt(QLT("Fires Per SM Surface"), &globals::maxFiresPerSurfaceSM, 0, 7);
         if (ImGuiMCP::IsItemHovered())
         {
-            ImGuiMCP::SetTooltip("Max fire lights allowed on small surfaces.");
+            ImGuiMCP::SetTooltip(QLT("Max fire lights allowed on small surfaces."));
         }
 
         ImGuiMCP::NextColumn();
         ImGuiMCP::PushItemWidth(colWidth);
 
-        ImGuiMCP::SliderInt("Candles Per M Surface", &globals::maxCandlesPerSurfaceM, 0, 10);
+        ImGuiMCP::SliderInt(QLT("Candles Per M Surface"), &globals::maxCandlesPerSurfaceM, 0, 10);
         if (ImGuiMCP::IsItemHovered())
         {
-            ImGuiMCP::SetTooltip("Max candle lights allowed on medium surfaces.");
+            ImGuiMCP::SetTooltip(QLT("Max candle lights allowed on medium surfaces."));
         }
 
-        ImGuiMCP::SliderInt("Chandeliers Per M Surface", &globals::maxChandeliersPerSurfaceM, 0, 10);
+        ImGuiMCP::SliderInt(QLT("Chandeliers Per M Surface"), &globals::maxChandeliersPerSurfaceM, 0, 10);
         if (ImGuiMCP::IsItemHovered())
         {
-            ImGuiMCP::SetTooltip("Max chandelier lights allowed on medium surfaces.");
+            ImGuiMCP::SetTooltip(QLT("Max chandelier lights allowed on medium surfaces."));
         }
 
-        ImGuiMCP::SliderInt("Fires Per M Surface", &globals::maxFiresPerSurfaceM, 0, 10);
+        ImGuiMCP::SliderInt(QLT("Fires Per M Surface"), &globals::maxFiresPerSurfaceM, 0, 10);
         if (ImGuiMCP::IsItemHovered())
         {
-            ImGuiMCP::SetTooltip("Max fire lights allowed on medium surfaces.");
+            ImGuiMCP::SetTooltip(QLT("Max fire lights allowed on medium surfaces."));
         }
 
-        ImGuiMCP::SliderFloat("Max Candle Distance", &globals::maxCandleDistance, 0, 1000);
+        ImGuiMCP::SliderFloat(QLT("Max Candle Distance"), &globals::maxCandleDistance, 0, 1000);
 
         if (ImGuiMCP::IsItemHovered()) {
-            ImGuiMCP::SetTooltip("Max distance a candle can be to affect a medium and small surface (requires kCandle flag)");
+            ImGuiMCP::SetTooltip(QLT("Max distance a candle can be to affect a medium and small surface (requires kCandle flag)"));
         }
 
-        ImGuiMCP::SliderFloat("Max Candle Z Distance", &globals::maxCandleZDistance, 0, 500);
+        ImGuiMCP::SliderFloat(QLT("Max Candle Z Distance"), &globals::maxCandleZDistance, 0, 500);
         if (ImGuiMCP::IsItemHovered()) {
-            ImGuiMCP::SetTooltip("Maximum distance a candle can shine light on a medium and small surface below it (requires kCandle flag)");
+            ImGuiMCP::SetTooltip(QLT("Maximum distance a candle can shine light on a medium and small surface below it (requires kCandle flag)"));
         }
 
-        ImGuiMCP::SliderFloat("Max Chandelier Distance", &globals::maxChandelierDistance, 0, 200);
+        ImGuiMCP::SliderFloat(QLT("Max Chandelier Distance"), &globals::maxChandelierDistance, 0, 200);
         if (ImGuiMCP::IsItemHovered()) {
-            ImGuiMCP::SetTooltip("Max distance a chandelier can be to affect a medium and small surface (requires kChandelier flag)");
+            ImGuiMCP::SetTooltip(QLT("Max distance a chandelier can be to affect a medium and small surface (requires kChandelier flag)"));
         }
 
-        ImGuiMCP::SliderFloat("Max Chandelier Z Distance", &globals::maxChandelierZDistance, 0, 1000);
+        ImGuiMCP::SliderFloat(QLT("Max Chandelier Z Distance"), &globals::maxChandelierZDistance, 0, 1000);
         if (ImGuiMCP::IsItemHovered()) {
-            ImGuiMCP::SetTooltip("Maximum vertical distance a chandelier can affect a medium and small surface (requires kChandelier flag)");
+            ImGuiMCP::SetTooltip(QLT("Maximum vertical distance a chandelier can affect a medium and small surface (requires kChandelier flag)"));
         }
 
         ImGuiMCP::PopItemWidth();
