@@ -13,14 +13,14 @@ void __stdcall RenderSettings() {
     FontAwesome::PushSolid();
     auto iconUtf8 = FontAwesome::UnicodeToUtf8(0xf0eb);
 
-    ImGuiMCP::Text("%s ReLight Menu", iconUtf8.c_str());
+    ImGuiMCP::Text(QLT("%s ReLight Menu"), iconUtf8.c_str());
     ImGuiMCP::PopStyleColor();
     ImGuiMCP::SameLine();
 
-    bool saveINIClicked = ImGuiMCP::Button("Save INI");
+    bool saveINIClicked = ImGuiMCP::Button(QLT("Save INI"));
 
     if (ImGuiMCP::IsItemHovered())
-        ImGuiMCP::SetTooltip("Write current settings to ReLight.ini");
+        ImGuiMCP::SetTooltip(QLT("Write current settings to ReLight.ini"));
 
     ImGuiMCP::ImVec2 rectMax = ImGuiMCP::GetItemRectMax();
     ImGuiMCP::ImVec2 rectMin = ImGuiMCP::GetItemRectMin();
@@ -40,42 +40,42 @@ void __stdcall RenderSettings() {
 
     ImGuiMCP::SameLine();
 
-    if (ImGuiMCP::Button("Debug log all lights")) {
+    if (ImGuiMCP::Button(QLT("Debug log all lights"))) {
         debugLogAllLights();
     }
 
-    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip("Log all currently active relight lights to relight.log file");
+    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(QLT("Log all currently active relight lights to relight.log file"));
 
     ImGuiMCP::Separator();
 
-    ImGuiMCP::Checkbox("Disable Game Lights", &globals::disableGameLights);
-    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip("Disable all game lights except for those in exclude by light editor ID section in Relight.ini\n Used so the Relight Official light add on can start with a clean base");
+    ImGuiMCP::Checkbox(QLT("Disable Game Lights"), &globals::disableGameLights);
+    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(QLT("Disable all game lights except for those in exclude by light editor ID section in Relight.ini\n Used so the Relight Official light add on can start with a clean base"));
 
-    ImGuiMCP::Checkbox("Remove Fake Glow Orbs", &globals::removeFakeGlowOrbs);
-    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip("Remove fake glow orbs used by Bethesda");
+    ImGuiMCP::Checkbox(QLT("Remove Fake Glow Orbs"), &globals::removeFakeGlowOrbs);
+    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(QLT("Remove fake glow orbs used by Bethesda"));
 
-    ImGuiMCP::Checkbox("All Relights As ISL", &globals::allRelightsAsISL);
-    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip("Make all Relights have Inverse Squared Lighting regardless of ISL flag fake glow orbs used by Bethesda, Requires Cell Rrset");
+    ImGuiMCP::Checkbox(QLT("All Relights As ISL"), &globals::allRelightsAsISL);
+    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(QLT("Make all Relights have Inverse Squared Lighting regardless of ISL flag fake glow orbs used by Bethesda, Requires Cell Rrset"));
 
-    ImGuiMCP::Checkbox("Enable Debugging Light Bulbs", &globals::enableDebugLightBulbs);
-    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip("Show Creation Kit Style Light Bulbs Where Lights Were Placed");
+    ImGuiMCP::Checkbox(QLT("Enable Debugging Light Bulbs"), &globals::enableDebugLightBulbs);
+    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(QLT("Show Creation Kit Style Light Bulbs Where Lights Were Placed"));
 
-    ImGuiMCP::Checkbox("Draw Debug Lines", &globals::enableDebugLines);
-    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip("Draw Lines Around Lights to make positioning easier");
+    ImGuiMCP::Checkbox(QLT("Draw Debug Lines"), &globals::enableDebugLines);
+    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(QLT("Draw Lines Around Lights to make positioning easier"));
 
     ImGuiMCP::SliderInt(
-        "Max distance from light to draw debug lights",
+        QLT("Max distance from light to draw debug lights"),
         &globals::distanceForDrawDebugLines,
         0,
         10000,
         "%d");
-    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip("Any light futher then this value will not draw debug lines");
+    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(QLT("Any light futher then this value will not draw debug lines"));
 
 
     ImGuiMCP::Separator();
 
     if (ImGuiMCP::SliderFloat(
-        "Brightness Multiplier",
+        QLT("Brightness Multiplier"),
         &globals::brightnessModifier,
         0.1f,
         2.0f,
@@ -122,10 +122,10 @@ void __stdcall RenderSettings() {
         }
     }
 
-    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip("Change brightness of all Relight lights.");
+    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(QLT("Change brightness of all Relight lights."));
 
     if (ImGuiMCP::SliderFloat(
-        "Non SKSE Lights Brightness Multiplier",
+        QLT("Non SKSE Lights Brightness Multiplier"),
         &globals::vanillaBrightnessModifier,
         0.1f,
         2.0f,
@@ -134,22 +134,22 @@ void __stdcall RenderSettings() {
 
     if (ImGuiMCP::IsItemHovered()) {
         ImGuiMCP::BeginTooltip();
-        ImGuiMCP::Text("This only works on cell reset");
+        ImGuiMCP::Text(QLT("This only works on cell reset"));
         ImGuiMCP::EndTooltip();
     }
 
     if (ImGuiMCP::SliderFloat(
-        "Interior Brightness",
+        QLT("Interior Brightness"),
         &globals::interiorBrightness,
         0.1f,
         2.0f,
         "%.2f")) {
         SetBaseGameBrightness(globals::interiorBrightness);
     }
-    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip("Sets the base game's global brightness setting while indoors.");
+    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(QLT("Sets the base game's global brightness setting while indoors."));
 
     if (ImGuiMCP::SliderFloat(
-        "Exterior Brightness",
+        QLT("Exterior Brightness"),
         &globals::exteriorBrightness,
         0.1f,
         2.0f,
@@ -157,9 +157,9 @@ void __stdcall RenderSettings() {
         SetBaseGameBrightness(globals::exteriorBrightness);
     }
 
-    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip("Sets the base game's global brightness setting while outdoors.");
+    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(QLT("Sets the base game's global brightness setting while outdoors."));
 
-    if (ImGuiMCP::SliderInt("Logging Level", &globals::loggingLevel, 0, 3)) {
+    if (ImGuiMCP::SliderInt(QLT("Logging Level"), &globals::loggingLevel, 0, 3)) {
         spdlog::level::level_enum lvl;
         switch (globals::loggingLevel) {
         case 0: lvl = spdlog::level::critical; break;
@@ -171,47 +171,47 @@ void __stdcall RenderSettings() {
         spdlog::set_level(lvl);
     }
 
-    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(" Set Logging Level (0: critical, 1: warnings/errors, 2: info, 3: debug)");
+    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(QLT(" Set Logging Level (0: critical, 1: warnings/errors, 2: info, 3: debug)"));
 
     ImGuiMCP::Separator();
 
-    if (ImGuiMCP::CollapsingHeader("Whitelist (by plugin name)")) {
+    if (ImGuiMCP::CollapsingHeader(QLT("Whitelist (by plugin name)"))) {
         for (auto& entry : globals::whitelist)
             ImGuiMCP::Text("%s", entry.c_str());
     }
 
-    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip("Mods whos esp name are in here will not have their lights disabled by relight no matter what.");
+    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(QLT("Mods whos esp name are in here will not have their lights disabled by relight no matter what."));
 
-    if (ImGuiMCP::CollapsingHeader("Priority Nodes")) {
+    if (ImGuiMCP::CollapsingHeader(QLT("Priority Nodes"))) {
         for (auto& entry : globals::priorityList)
             ImGuiMCP::Text("%s", entry.c_str());
     }
 
     if (ImGuiMCP::IsItemHovered())   ImGuiMCP::SetTooltip(
-        "Relight uses partial string matching (e.g. \"candle\" matches any candle mesh).\n"
+        QLT("Relight uses partial string matching (e.g. \"candle\" matches any candle mesh).\n"
         "This can cause unintended matches (e.g. \"candlechandelier01\").\n"
-        "Meshes listed here take priority and override broader matches."
+        "Meshes listed here take priority and override broader matches.")
     );
 
-    if (ImGuiMCP::CollapsingHeader("Excluded Mesh Paths (Exact)")) {
+    if (ImGuiMCP::CollapsingHeader(QLT("Excluded Mesh Paths (Exact)"))) {
         for (auto& entry : globals::meshPathExclusionList)
             ImGuiMCP::Text("%s", entry.c_str());
     }
 
     if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(
-        "Relight uses partial string matching (e.g. \"candle\" matches any candle mesh).\n"
-        "This can cause unintended matches, any mesh name here will be excluded from getting Relights\n"
+        QLT("Relight uses partial string matching (e.g. \"candle\" matches any candle mesh).\n"
+        "This can cause unintended matches, any mesh name here will be excluded from getting Relights\n")
     );
 
 
-    if (ImGuiMCP::CollapsingHeader("Excluded Mesh Paths (Partial Match)")) {
+    if (ImGuiMCP::CollapsingHeader(QLT("Excluded Mesh Paths (Partial Match)"))) {
         for (auto& entry : globals::meshPathExclusionListPartialMatch)
             ImGuiMCP::Text("%s", entry.c_str());
     }
 
     if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(
-        "Relight uses partial string matching (e.g. \"candle\" matches any candle mesh).\n"
-        "Any mesh name that contains a word in this list will be excluded from getting Relights\n"
+        QLT("Relight uses partial string matching (e.g. \"candle\" matches any candle mesh).\n"
+        "Any mesh name that contains a word in this list will be excluded from getting Relights\n")
     );
 
 }

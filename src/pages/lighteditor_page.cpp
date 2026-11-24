@@ -18,22 +18,22 @@ void __stdcall RenderLightEditor() {
 
     FontAwesome::PushSolid();
 
-    ImGuiMCP::Text("%s Light Editor", editorIcon.c_str());
+    ImGuiMCP::Text(QLT("%s Light Editor"), editorIcon.c_str());
     ImGuiMCP::PopStyleColor();
     ImGuiMCP::SameLine();
 
-    bool saveClicked = ImGuiMCP::Button("Save");
-    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip("Save the currently selected light template's settings");
+    bool saveClicked = ImGuiMCP::Button(QLT("Save"));
+    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(QLT("Save the currently selected light template's settings"));
 
     ImGuiMCP::SameLine(0, 10.0f);
 
-    bool defaultClicked = ImGuiMCP::Button("Default");
-    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip("Restore the currently selected light template's settings to what they were at game start");
+    bool defaultClicked = ImGuiMCP::Button(QLT("Default"));
+    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(QLT("Restore the currently selected light template's settings to what they were at game start"));
 
     ImGuiMCP::SameLine(0, 10.0f);
 
     bool deleteClicked = ImGuiMCP::Button(trashIcon.c_str());
-    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip("Delete the Json file from Relight/Configs. You will need to restart the game for changes to take effect");
+    if (ImGuiMCP::IsItemHovered()) ImGuiMCP::SetTooltip(QLT("Delete the Json file from Relight/Configs. You will need to restart the game for changes to take effect"));
 
     ImGuiMCP::ImVec2 rectMax = ImGuiMCP::GetItemRectMax();
     ImGuiMCP::ImVec2 rectMin = ImGuiMCP::GetItemRectMin();
@@ -154,7 +154,7 @@ void __stdcall RenderLightEditor() {
 
     if (deleteClicked) {
         if (active.valid()) {
-            ImGuiMCP::OpenPopup("Confirm Delete Light Template");
+            ImGuiMCP::OpenPopup(QLT("Confirm Delete Light Template"));
         }
         else {
             logger::warn("Delete clicked but no light selected");
@@ -163,15 +163,15 @@ void __stdcall RenderLightEditor() {
     }
 
     if (ImGuiMCP::BeginPopupModal(
-        "Confirm Delete Light Template",
+        QLT("Confirm Delete Light Template"),
         nullptr,
         ImGuiMCP::ImGuiWindowFlags_AlwaysAutoResize))
     {
-        ImGuiMCP::Text("Are you sure you want to delete this light template?");
+        ImGuiMCP::Text(QLT("Are you sure you want to delete this light template?"));
 
         ImGuiMCP::Spacing();
 
-        if (ImGuiMCP::Button("Delete"))
+        if (ImGuiMCP::Button(QLT("Delete")))
         {
             deleteButton.set(buttonState::Working);
 
@@ -187,7 +187,7 @@ void __stdcall RenderLightEditor() {
 
         ImGuiMCP::SameLine();
 
-        if (ImGuiMCP::Button("Cancel")) {
+        if (ImGuiMCP::Button(QLT("Cancel"))) {
             ImGuiMCP::CloseCurrentPopup();
         }
 
@@ -258,14 +258,14 @@ void __stdcall RenderLightEditor() {
         showPluginLights ? ImGuiMCP::ImVec4{0.60F, 0.50F, 0.10F, 0.80F} : ImGuiMCP::ImVec4{0.35F, 0.35F, 0.35F, 0.5F});
     ImGuiMCP::PushStyleColor(ImGuiMCP::ImGuiCol_Text,
         showPluginLights ? ImGuiMCP::ImVec4{1.0F, 0.95F, 0.9F, 1.0F} : ImGuiMCP::ImVec4{0.6F, 0.6F, 0.6F, 0.8F});
-    if (ImGuiMCP::Button("Plugin Lights", ImGuiMCP::ImVec2(130, 0))) {
+    if (ImGuiMCP::Button(QLT("Plugin Lights"), ImGuiMCP::ImVec2(130, 0))) {
         if (!showPluginLights) {
             showPluginLights = true;
         }
     }
 
     if (ImGuiMCP::IsItemHovered()) {
-        ImGuiMCP::SetTooltip("Any light from an ESP, ESL, or ESM plugin.");
+        ImGuiMCP::SetTooltip(QLT("Any light from an ESP, ESL, or ESM plugin."));
     }
 
     ImGuiMCP::PopStyleColor(2);
@@ -274,19 +274,19 @@ void __stdcall RenderLightEditor() {
         !showPluginLights ? ImGuiMCP::ImVec4{0.60F, 0.50F, 0.10F, 0.80F} : ImGuiMCP::ImVec4{0.35F, 0.35F, 0.35F, 0.5F});
     ImGuiMCP::PushStyleColor(ImGuiMCP::ImGuiCol_Text,
         !showPluginLights ? ImGuiMCP::ImVec4{1.0F, 0.95F, 0.9F, 1.0F} : ImGuiMCP::ImVec4{0.6F, 0.6F, 0.6F, 0.8F});
-    if (ImGuiMCP::Button("Relight Lights", ImGuiMCP::ImVec2(130, 0))) {
+    if (ImGuiMCP::Button(QLT("Relight Lights"), ImGuiMCP::ImVec2(130, 0))) {
         if (showPluginLights) {
             showPluginLights = false;
         }
     }
 
     if (ImGuiMCP::IsItemHovered()) {
-        ImGuiMCP::SetTooltip("Lights attached using the Relight framework.");
+        ImGuiMCP::SetTooltip(QLT("Lights attached using the Relight framework."));
     }
 
     ImGuiMCP::PopStyleColor(2);
 
-    RenderLightList(filteredLights, displaySelectedIndex, "Loaded Lights");
+    RenderLightList(filteredLights, displaySelectedIndex, QLT("Loaded Lights"));
 
     // translate post-render display index back to the correct original list
     if (displaySelectedIndex >= 0 && displaySelectedIndex < (int)filteredLights.size()) {
@@ -432,12 +432,12 @@ void __stdcall RenderLightEditor() {
                         constexpr float kButtonSpacing = 10.0f;
 
                         // --- Name row ---
-                        std::string flagsLabel = std::string("Flags ") + flagIcon;
+                        std::string flagsLabel = std::string(QLT("Flags ")) + flagIcon;
                         ImGuiMCP::ImVec2 flagsTextSize = ImGuiMCP::CalcTextSize(flagsLabel.c_str(), nullptr, false, -1.0f);
 
                         float flagsButtonWidth = flagsTextSize.x + style->FramePadding.x * 2.0f;
 
-                        ImGuiMCP::Text("Name:");
+                        ImGuiMCP::Text(QLT("Name:"));
                         ImGuiMCP::SameLine();
                         ImGuiMCP::Dummy(ImGuiMCP::ImVec2(35.0f, 0.0f));
                         ImGuiMCP::SameLine();
@@ -454,7 +454,7 @@ void __stdcall RenderLightEditor() {
 
                         if (ImGuiMCP::IsItemHovered()) {
                             ImGuiMCP::SetTooltip(
-                                "This updates how the template name appears in the light editor."
+                                QLT("This updates how the template name appears in the light editor.")
                             );
                         }
 
@@ -475,10 +475,10 @@ void __stdcall RenderLightEditor() {
                         newTemplateCategory[sizeof(newTemplateCategory) - 1] = '\0';
 
                         // --- Category row ---
-                        ImGuiMCP::ImVec2 emittanceTextSize = ImGuiMCP::CalcTextSize("External Emittance", nullptr, false, -1.0f);
+                        ImGuiMCP::ImVec2 emittanceTextSize = ImGuiMCP::CalcTextSize(QLT("External Emittance"), nullptr, false, -1.0f);
                         float emittanceButtonWidth = emittanceTextSize.x + style->FramePadding.x * 2.0f;
 
-                        ImGuiMCP::Text("Category:");
+                        ImGuiMCP::Text(QLT("Category:"));
                         ImGuiMCP::SameLine();
                         ImGuiMCP::Dummy(ImGuiMCP::ImVec2(10.0f, 0.0f));
                         ImGuiMCP::SameLine();
@@ -490,7 +490,7 @@ void __stdcall RenderLightEditor() {
                         ImGuiMCP::SetNextItemWidth(categoryInputWidth);
                         ImGuiMCP::InputText("##templateCategory", newTemplateCategory, sizeof(newTemplateCategory));
                         if (ImGuiMCP::IsItemHovered()) {
-                            ImGuiMCP::SetTooltip("This organizes templates into a dropdown for a cleaner layout.");
+                            ImGuiMCP::SetTooltip(QLT("This organizes templates into a dropdown for a cleaner layout."));
                         }
 
                         if (ImGuiMCP::IsItemDeactivatedAfterEdit() && config.menuCategory != newTemplateCategory)
@@ -523,11 +523,11 @@ void __stdcall RenderLightEditor() {
                             ImGuiMCP::ImVec4{ 1.0f, 0.85f, 0.4f, 1.0f });
                         FontAwesome::PushSolid();
 
-                        ImGuiMCP::Text("%s Illuminance", lightbulbIcon.c_str());
+                        ImGuiMCP::Text(QLT("%s Illuminance"), lightbulbIcon.c_str());
                         ImGuiMCP::PopStyleColor();
                         ImGuiMCP::Separator();
 
-                        if (ImGuiMCP::SliderFloat("Brightness", &config.startingFade, 0.0f, brightnessToUse, "%.1f")) {
+                        if (ImGuiMCP::SliderFloat(QLT("Brightness"), &config.startingFade, 0.0f, brightnessToUse, "%.1f")) {
 
                             auto* ssNode = RE::BSShaderManager::State::GetSingleton().shadowSceneNode[0];
                             if (ssNode && !isPluginWithFlicker) {
@@ -549,7 +549,7 @@ void __stdcall RenderLightEditor() {
 
 
                         if (!showISLSliders) {
-                            if (ImGuiMCP::SliderFloat("Radius", &lightData.radius.x, 1.0f, radiusToUse, "%.2f")) {
+                            if (ImGuiMCP::SliderFloat(QLT("Radius"), &lightData.radius.x, 1.0f, radiusToUse, "%.2f")) {
                                 auto* ssNode = RE::BSShaderManager::State::GetSingleton().shadowSceneNode[0];
                                 if (ssNode && !config.isPluginLight) {
                                     auto& rt = ssNode->GetRuntimeData();
@@ -570,7 +570,7 @@ void __stdcall RenderLightEditor() {
                         }
 
                         if (selectedIslRt && showISLSliders) {
-                            if (ImGuiMCP::SliderFloat("Cutoff (ISL)", &selectedIslRt->cutoffOverride, 0.01f, 0.99f, "%.2f")) {
+                            if (ImGuiMCP::SliderFloat(QLT("Cutoff (ISL)"), &selectedIslRt->cutoffOverride, 0.01f, 0.99f, "%.2f")) {
                                 auto* ssNode = RE::BSShaderManager::State::GetSingleton().shadowSceneNode[0];
                                 if (ssNode && !config.isPluginLight) {
                                     auto& rt = ssNode->GetRuntimeData();
@@ -591,7 +591,7 @@ void __stdcall RenderLightEditor() {
                                 }
                             }
 
-                            if (ImGuiMCP::SliderFloat("Size (ISL)", &selectedIslRt->size, 0.0f, 10.0f, "%.2f")) {
+                            if (ImGuiMCP::SliderFloat(QLT("Size (ISL)"), &selectedIslRt->size, 0.0f, 10.0f, "%.2f")) {
                                 auto* ssNode = RE::BSShaderManager::State::GetSingleton().shadowSceneNode[0];
                                 if (ssNode && !config.isPluginLight) {
                                     auto& rt = ssNode->GetRuntimeData();
@@ -645,7 +645,7 @@ void __stdcall RenderLightEditor() {
                         ImGuiMCP::PushStyleColor(
                             ImGuiMCP::ImGuiCol_Text,
                             ImGuiMCP::ImVec4{ 1.0f, 0.85f, 0.4f, 1.0f });
-                        ImGuiMCP::Text("Flicker");
+                        ImGuiMCP::Text(QLT("Flicker"));
                         ImGuiMCP::PopStyleColor();
 
                         ImGuiMCP::Separator();
@@ -653,7 +653,7 @@ void __stdcall RenderLightEditor() {
                         ImGuiMCP::BeginDisabled(config.isPluginLight && !isPluginWithFlicker);
 
                         if (ImGuiMCP::SliderFloat(
-                            "Flicker Rate",
+                            QLT("Flicker Rate"),
                             &config.flickersPerSecond,
                             0.0f, 1.0f, "%.2f"))
                         {
@@ -667,7 +667,7 @@ void __stdcall RenderLightEditor() {
                         ImGuiMCP::BeginDisabled(config.flickersPerSecond == 0.0f);
 
                         if (ImGuiMCP::SliderFloat(
-                            "Flicker Intensity",
+                            QLT("Flicker Intensity"),
                             &config.flickerIntensity,
                             0.0f, 1.0f, "%.2f"))
                         {
@@ -680,7 +680,7 @@ void __stdcall RenderLightEditor() {
 
 
                         if (ImGuiMCP::SliderFloat(
-                            "Movement",
+                            QLT("Movement"),
                             &config.flickerAmplitude,
                             0.0f,
                             5,
@@ -720,13 +720,13 @@ void __stdcall RenderLightEditor() {
                         ImGuiMCP::PushStyleColor(
                             ImGuiMCP::ImGuiCol_Text,
                             ImGuiMCP::ImVec4{ 1.0f, 0.85f, 0.4f, 1.0f });
-                        ImGuiMCP::Text("%s Translation", coordinatesIcon.c_str());
+                        ImGuiMCP::Text(QLT("%s Translation"), coordinatesIcon.c_str());
                         ImGuiMCP::PopStyleColor();
 
                         ImGuiMCP::Separator();
 
                         if (ImGuiMCP::SliderFloat3(
-                            "Position",
+                            QLT("Position"),
                             &config.position[0],
                             -sliderRange, sliderRange, "%.3f")) {
 
@@ -780,7 +780,7 @@ void __stdcall RenderLightEditor() {
                         if (isSpotLight)
                         {
                             if (ImGuiMCP::SliderFloat3(
-                                "Rotation",
+                                QLT("Rotation"),
                                 &config.rotation[0],
                                 -180.0f,
                                 180.0f,
@@ -872,11 +872,11 @@ void __stdcall RenderLightEditor() {
                     {
                         ImGuiMCP::PushStyleColor(ImGuiMCP::ImGuiCol_Text,
                             ImGuiMCP::ImVec4{ 1.0f, 0.85f, 0.4f, 1.0f });
-                        ImGuiMCP::Text("%s Color (RGB)", palletIcon.c_str());
+                        ImGuiMCP::Text(QLT("%s Color (RGB)"), palletIcon.c_str());
                         ImGuiMCP::PopStyleColor();
                         ImGuiMCP::Separator();
 
-                        if (ImGuiMCP::SliderInt3("RGB", &config.diffuseColor[0], 0, 255))
+                        if (ImGuiMCP::SliderInt3(QLT("RGB"), &config.diffuseColor[0], 0, 255))
                         {
                             RE::NiColor runtimeColor{
                                 config.diffuseColor[0] / 255.0f,
@@ -906,11 +906,11 @@ void __stdcall RenderLightEditor() {
                         if (ImGuiMCP::IsItemHovered())
                         {
                             ImGuiMCP::BeginTooltip();
-                            ImGuiMCP::Text("Click to open the color picker");
+                            ImGuiMCP::Text(QLT("Click to open the color picker"));
                             ImGuiMCP::Separator();
-                            ImGuiMCP::Text("R: %.3f", lightData.diffuse.red);
-                            ImGuiMCP::Text("G: %.3f", lightData.diffuse.green);
-                            ImGuiMCP::Text("B: %.3f", lightData.diffuse.blue);
+                            ImGuiMCP::Text(QLT("R: %.3f"), lightData.diffuse.red);
+                            ImGuiMCP::Text(QLT("G: %.3f"), lightData.diffuse.green);
+                            ImGuiMCP::Text(QLT("B: %.3f"), lightData.diffuse.blue);
                             ImGuiMCP::EndTooltip();
                         }
                     }
@@ -918,7 +918,7 @@ void __stdcall RenderLightEditor() {
 
                     if (colorPickerOpen)
                     {
-                        if (ImGuiMCP::Begin("Color Picker", &colorPickerOpen,
+                        if (ImGuiMCP::Begin(QLT("Color Picker"), &colorPickerOpen,
                             ImGuiMCP::ImGuiWindowFlags_AlwaysAutoResize |
                             ImGuiMCP::ImGuiWindowFlags_NoCollapse))
                         {
@@ -959,14 +959,14 @@ void __stdcall RenderLightEditor() {
                     {
                         ImGuiMCP::PushStyleColor(ImGuiMCP::ImGuiCol_Text,
                             ImGuiMCP::ImVec4{ 1.0f, 0.85f, 0.4f, 1.0f });
-                        ImGuiMCP::Text("Non-Runtime Light Settings");
+                        ImGuiMCP::Text(QLT("Non-Runtime Light Settings"));
                         ImGuiMCP::PopStyleColor();
 
                         ImGuiMCP::SameLine();
 
                         ImGuiMCP::BeginDisabled(isTorchOrMagicLight);
 
-                        if (ImGuiMCP::Button("Refresh Lights")) {
+                        if (ImGuiMCP::Button(QLT("Refresh Lights"))) {
 
                             if (config.isPluginLight) {
 
@@ -995,7 +995,7 @@ void __stdcall RenderLightEditor() {
                         }
 
                         if (ImGuiMCP::IsItemHovered()) {
-                            ImGuiMCP::SetTooltip("Changes to these settings require refreshing lights to take effect.");
+                            ImGuiMCP::SetTooltip(QLT("Changes to these settings require refreshing lights to take effect."));
                         }
 
                         ImGuiMCP::Separator();
@@ -1008,30 +1008,30 @@ void __stdcall RenderLightEditor() {
                         ImGuiMCP::Spacing();
                         ImGuiMCP::PushItemWidth(halfWidth);
 
-                        ImGuiMCP::SliderFloat("Fall Off", &config.falloff, 0.0f, 5.0f, "%.1f");
-                        ImGuiMCP::SliderFloat("Depth Bias", &config.depthBias, 0.0f, 30.0f, "%.2f");
+                        ImGuiMCP::SliderFloat(QLT("Fall Off"), &config.falloff, 0.0f, 5.0f, "%.1f");
+                        ImGuiMCP::SliderFloat(QLT("Depth Bias"), &config.depthBias, 0.0f, 30.0f, "%.2f");
                         if (ImGuiMCP::IsItemHovered()) {
-                            ImGuiMCP::SetTooltip("Affect shadow quality");
+                            ImGuiMCP::SetTooltip(QLT("Affect shadow quality"));
                         }
 
-                        ImGuiMCP::SliderFloat("FOV", &config.fov, 0.0f, 90.0f, "%.2f");
+                        ImGuiMCP::SliderFloat(QLT("FOV"), &config.fov, 0.0f, 90.0f, "%.2f");
                         if (ImGuiMCP::IsItemHovered()) {
-                            ImGuiMCP::SetTooltip("For Spotlights");
+                            ImGuiMCP::SetTooltip(QLT("For Spotlights"));
                         }
 
                         ImGuiMCP::NextColumn();
 
-                        ImGuiMCP::SliderFloat("Near Distance", &config.nearDistance, 0.0f, 5.0f, "%.2f");
+                        ImGuiMCP::SliderFloat(QLT("Near Distance"), &config.nearDistance, 0.0f, 5.0f, "%.2f");
 
                         if (!config.isPluginLight) {
-                            ImGuiMCP::Checkbox("Is Shadow Light", &config.shadowLight);
+                            ImGuiMCP::Checkbox(QLT("Is Shadow Light"), &config.shadowLight);
 
                             ImGuiMCP::BeginDisabled(!isShadowLight);
 
                             bool isSpot =
                                 LightData::HasRelightFlag(config.flags, RELIGHT_FLAGS::kSpotLight);
 
-                            if (ImGuiMCP::Checkbox("SpotLight", &isSpot))
+                            if (ImGuiMCP::Checkbox(QLT("SpotLight"), &isSpot))
                             {
                                 if (isSpot) {
                                     config.flags |= static_cast<int>(RELIGHT_FLAGS::kSpotLight);
@@ -1047,7 +1047,7 @@ void __stdcall RenderLightEditor() {
                             }
 
                             if (ImGuiMCP::IsItemHovered()) {
-                                ImGuiMCP::SetTooltip("SpotLights only work for shadow lights, FOV and rotation can be used to edit them");
+                                ImGuiMCP::SetTooltip(QLT("SpotLights only work for shadow lights, FOV and rotation can be used to edit them"));
                             }
 
                             ImGuiMCP::EndDisabled(); // closes !isShadowLight

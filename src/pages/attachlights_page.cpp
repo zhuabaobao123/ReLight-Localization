@@ -108,7 +108,7 @@ void __stdcall RenderAttachRemove()
         resetState();
         ImGuiMCP::Dummy({ 0.0f, 50.0f });
         centerNextItem(350.0f);
-        ImGuiMCP::Text("Click on an object in the console to continue.");
+        ImGuiMCP::Text(QLT("Click on an object in the console to continue."));
         return;
     }
 
@@ -164,13 +164,13 @@ void __stdcall RenderAttachRemove()
     {
         ImGuiMCP::Dummy({ 0.0f, 50.0f });
         centerNextItem(470.0f);
-        ImGuiMCP::Text("Object Selected in the console already has a ReLight light.");
+        ImGuiMCP::Text(QLT("Object Selected in the console already has a ReLight light."));
 
         ImGuiMCP::Spacing();
         ImGuiMCP::Dummy({ 0.0f, 20.0f });
         centerNextItem(400.0f);
 
-        if (RenderYellowButton("Add another light")) {
+        if (RenderYellowButton(QLT("Add another light"))) {
 
             multiLight = true;
 
@@ -276,12 +276,12 @@ void __stdcall RenderAttachRemove()
         }
 
         if (ImGuiMCP::IsItemHovered()) {
-            ImGuiMCP::SetTooltip("You can edit new light in Light Editor as Torch [1], Torch [2] ect.");
+            ImGuiMCP::SetTooltip(QLT("You can edit new light in Light Editor as Torch [1], Torch [2] ect."));
         }
 
         ImGuiMCP::SameLine();
 
-        if (RenderRedButton("Add to exclusion list")) {
+        if (RenderRedButton(QLT("Add to exclusion list"))) {
 
             std::string refIDandModName = forms::BuildFormIDAndModName(formID, modName);
 
@@ -397,9 +397,9 @@ void __stdcall RenderAttachRemove()
         }
         if (ImGuiMCP::IsItemHovered()) {
             ImGuiMCP::SetTooltip(
-                "Adds to exclude by refID section in RELight.ini file, preventing object from getting a Relight\n"
+                QLT("Adds to exclude by refID section in RELight.ini file, preventing object from getting a Relight\n"
                 "TIP: Can also use to change a automated light into a seperate light you can edit by itself in the light editor.\n"
-                "Just push this button, then when attaching a new light select 'this object only'"
+                "Just push this button, then when attaching a new light select 'this object only'")
             );
         }
 
@@ -410,36 +410,36 @@ void __stdcall RenderAttachRemove()
     {
         ImGuiMCP::Dummy({ 0.0f, 50.0f });
         centerNextItem(430.0f);
-        ImGuiMCP::Text("      Attaching light to object selected in console.\nCreate new light template or add to existing template?");
+        ImGuiMCP::Text(QLT("      Attaching light to object selected in console.\nCreate new light template or add to existing template?"));
 
 
         ImGuiMCP::Spacing();
         ImGuiMCP::Dummy({ 0.0f, 20.0f });
         centerNextItem(630.0f);
 
-        if (RenderYellowButton("Add to a existing template")) {
+        if (RenderYellowButton(QLT("Add to a existing template"))) {
             createNewTemplate = false;
             step = AttachLightStep::ChooseTemplate;
         }
 
         if (ImGuiMCP::IsItemHovered()) {
-            ImGuiMCP::SetTooltip("Adding to a existing template keeps your config folder uncluttered.");
+            ImGuiMCP::SetTooltip(QLT("Adding to a existing template keeps your config folder uncluttered."));
         }
 
         ImGuiMCP::SameLine();
 
-        if (RenderYellowButton("Create a new template")) {
+        if (RenderYellowButton(QLT("Create a new template"))) {
             createNewTemplate = true;
             newCfg = LightConfig{};
             step = AttachLightStep::ChooseScope;
         }
 
         if (ImGuiMCP::IsItemHovered()) {
-            ImGuiMCP::SetTooltip("Better if you want to control this light seperatly.");
+            ImGuiMCP::SetTooltip(QLT("Better if you want to control this light seperatly."));
         }
         ImGuiMCP::SameLine();
 
-        if (RenderRedButton("Add to exclusion list")) {
+        if (RenderRedButton(QLT("Add to exclusion list"))) {
 
             std::string refIDandModName = forms::BuildFormIDAndModName(formID, modName);
 
@@ -555,9 +555,9 @@ void __stdcall RenderAttachRemove()
         }
         if (ImGuiMCP::IsItemHovered()) {
             ImGuiMCP::SetTooltip(
-                "Adds to exclude by refID section in RELight.ini file, preventing object from getting a Relight\n"
+                QLT("Adds to exclude by refID section in RELight.ini file, preventing object from getting a Relight\n"
                 "TIP: Can also use to change a automated light into a seperate light you can edit by itself in the light editor.\n"
-                "Just push this button, then when attaching a new light select 'this object only'"
+                "Just push this button, then when attaching a new light select 'this object only'")
             );
         }
 
@@ -567,7 +567,7 @@ void __stdcall RenderAttachRemove()
     case AttachLightStep::ChooseTemplate:
     {
         centerNextItem(120.0f);
-        ImGuiMCP::Text("Select a template.");
+        ImGuiMCP::Text(QLT("Select a template."));
 
         if (configDisplay.empty()) {
 
@@ -632,7 +632,7 @@ void __stdcall RenderAttachRemove()
 
         if (selectedIndex == -1) {
             centerNextItem(60.0f);
-            if (RenderRedButton("Cancel")) {
+            if (RenderRedButton(QLT("Cancel"))) {
                 resetState();
             }
             break;
@@ -667,13 +667,13 @@ void __stdcall RenderAttachRemove()
 
         centerNextItem(170.0f);
 
-        if (RenderYellowButton("Confirm")) {
+        if (RenderYellowButton(QLT("Confirm"))) {
             step = AttachLightStep::ChooseScope;
         }
 
         ImGuiMCP::SameLine();
 
-        if (RenderRedButton("Cancel")) {
+        if (RenderRedButton(QLT("Cancel"))) {
             resetState();
         }
 
@@ -683,14 +683,14 @@ void __stdcall RenderAttachRemove()
     {
         ImGuiMCP::Dummy({ 0.0f, 50.0f });
         centerNextItem(290.0f);
-        ImGuiMCP::Text("This object only, or all objects like it?");
+        ImGuiMCP::Text(QLT("This object only, or all objects like it?"));
 
         ImGuiMCP::Spacing();
         ImGuiMCP::Dummy({ 0.0f, 20.0f });
 
         centerNextItem(330.0f);
 
-        if (RenderYellowButton("This object only")) {
+        if (RenderYellowButton(QLT("This object only"))) {
 
             refLight = true;
 
@@ -754,7 +754,7 @@ void __stdcall RenderAttachRemove()
 
         ImGuiMCP::SameLine();
 
-        if (RenderYellowButton("All like this")) {
+        if (RenderYellowButton(QLT("All like this"))) {
             refLight = false;
 
             RE::TESFile* baseOriginFile = baseObject->GetDescriptionOwnerFile();
@@ -801,13 +801,13 @@ void __stdcall RenderAttachRemove()
 
             auto a_root = selected->Get3D();
             if (!a_root) {
-                ImGuiMCP::Text("Could not load this object's 3D.");
+                ImGuiMCP::Text(QLT("Could not load this object's 3D."));
                 break;
             }
 
             auto attachNode = a_root->AsNode();
             if (!attachNode) {
-                ImGuiMCP::Text("Could not load this object's node.");
+                ImGuiMCP::Text(QLT("Could not load this object's node."));
                 break;
             }
 
@@ -831,7 +831,7 @@ void __stdcall RenderAttachRemove()
 
         ImGuiMCP::SameLine();
 
-        if (RenderRedButton("Cancel")) {
+        if (RenderRedButton(QLT("Cancel"))) {
             resetState();
             step = AttachLightStep::SelectTarget;
         }
@@ -843,7 +843,7 @@ void __stdcall RenderAttachRemove()
     {
         ImGuiMCP::Dummy({ 0.0f, 50.0f });
         centerNextItem(520.0f);
-        ImGuiMCP::Text("Light attached. You MUST confirm before saving in the light editor.");
+        ImGuiMCP::Text(QLT("Light attached. You MUST confirm before saving in the light editor."));
 
         ImGuiMCP::Spacing();
         ImGuiMCP::Dummy({ 0.0f, 20.0f });
@@ -880,7 +880,7 @@ void __stdcall RenderAttachRemove()
 
         if (showMenuNameBox) {
             ImGuiMCP::SetCursorPosX(280.0f);
-            ImGuiMCP::Text("Set Menu Name: ");
+            ImGuiMCP::Text(QLT("Set Menu Name: "));
             ImGuiMCP::SameLine();
             // Dummy added so both inputs for name and category are vertically aligned
             ImGuiMCP::Dummy(ImGuiMCP::ImVec2(108.0f, 0.0f));
@@ -895,7 +895,7 @@ void __stdcall RenderAttachRemove()
 
         if (showMenuCategoryBox) {
             ImGuiMCP::SetCursorPosX(280.0f);
-            ImGuiMCP::Text("Set Category Name (optional): ");
+            ImGuiMCP::Text(QLT("Set Category Name (optional): "));
             ImGuiMCP::SameLine();
             ImGuiMCP::SetNextItemWidth(250.0f);
 
@@ -909,7 +909,7 @@ void __stdcall RenderAttachRemove()
 
         centerNextItem(180.0f);
 
-        if (RenderYellowButton("Confirm")) {
+        if (RenderYellowButton(QLT("Confirm"))) {
 
             if (multiLight) {
                 entryCount = CountJsonEntriesInFile(newCfg.configPath);
@@ -1056,7 +1056,7 @@ void __stdcall RenderAttachRemove()
 
         ImGuiMCP::SameLine();
 
-        if (RenderRedButton("Cancel")) {
+        if (RenderRedButton(QLT("Cancel"))) {
             RE::ObjectRefHandle handle = selected->GetHandle();
 
             if (!selectedCfgs.empty()) {
@@ -1087,13 +1087,13 @@ void __stdcall RenderAttachRemove()
     {
         ImGuiMCP::Dummy({ 0.0f, 50.0f });
         centerNextItem(120.0f);
-        ImGuiMCP::Text("Lights removed.");
+        ImGuiMCP::Text(QLT("Lights removed."));
 
         ImGuiMCP::Dummy({ 0.0f, 20.0f });
         ImGuiMCP::Spacing();
 
         centerNextItem(50.0f);
-        if (RenderYellowButton("Okay")) {
+        if (RenderYellowButton(QLT("Okay"))) {
             step = AttachLightStep::SelectTarget;
             break;
         }

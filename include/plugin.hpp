@@ -5,6 +5,8 @@
 #include <SKSE/SKSE.h>
 #include <REL/Relocation.h>
 
+#include "I18n.h"
+
 using namespace std::literals;
 using namespace std;
 
